@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h1>Javascript Project</h1>
+
+<p>Here is the result of the code (all of the words based on the number of times they appear in the text):</p>
+
+<script>
+console.log("started the script.");
+// Check if a text appear in an array
+function checkIfExists(str, listOfWords) {
+   for (var i = 0; i < listOfWords.length; i++)
+   {
+   if (listOfWords[i][0] == str)
+   {
+   return 1;
+   }
+   }
+   return 0;
+}
+
+// This function takes the array, remove duplicates and prints the number of times each word appeared sorted (desc)
+function removeDuplicates(newListOfWords) {
+   const counts = {};
+   for (const num of newListOfWords) {
+      counts[num] = counts[num] ? counts[num] + 1 : 1;
+}
+const sorted = Object.keys(counts)
+  .sort((key1, key2) =>  counts[key2] - counts[key1])
+  .reduce(
+    (obj, key) => ({
+      ...obj,
+      [key]: counts[key]
+    }),
+    {}
+  )
+   var output = '';
+   for (var property in sorted) 
+   {
+   output += property + ': ' + sorted[property]+'<br>';
+   }
+   document.write(output);
+   return counts;
+}
+
+//////////////////////////////////////////// MAIN /////////////////////////////////////////////////////////////////////////////////////////////////
+
+var listOfWords = prompt('Please enter a list of words: (seperated by spaces)');
+var tempText = "";
+const newListOfWords = [];
+
+// Creating an array of words based on the words in the string, seperate each word based on where the spaces are
+for (var i = 0; i < listOfWords.length; i++)
+{
+   if (listOfWords.charAt(i) == " ")
+   {
+   newListOfWords.push(tempText);
+   tempText = "";
+   continue;
+   }
+   else
+   {
+   tempText = tempText + listOfWords.charAt(i);
+   }
+}
+newListOfWords.push(tempText);
+
+const lastList = removeDuplicates(newListOfWords);
+
+console.log("finished the script.");
+</script>
+
+</body>
+</html>
